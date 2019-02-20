@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			
+			body{
+				background:#E65666;
+			}
+			/*嘴的上半部分*/
+			.chidou > div:nth-child(1){
+				width:0;
+				height:0;
+				border-left:25px solid white;
+				border-bottom:25px solid white;
+				border-top:25px solid white;
+				
+				border-right:25px solid transparent;
+				
+				border-radius: 100%;/*弧度*/
+				
+				animation-name: zui-up;
+				animation-delay: 0s;
+				animation-duration: 0.5s;
+				animation-iteration-count: infinite;
+			}
+			
+			/*嘴的下半部分*/
+			.chidou > div:nth-child(2){
+				width:0;
+				height:0;
+				border-left:25px solid white;
+				border-bottom:25px solid white;
+				border-top:25px solid white;
+				
+				border-right:25px solid transparent;
+				
+				border-radius: 100%;/*弧度*/
+				
+				animation-name: zui-down;
+				animation-delay: 0s;
+				animation-duration: 0.5s;
+				animation-iteration-count: infinite;
+				
+				/*让下面的嘴向上移动*/
+				margin-top:-50px;
+			}
+			
+			@keyframes zui-up{
+				0% {
+					transform:rotateZ(0deg);
+				}
+				
+				50%{
+					transform:rotateZ(60deg);
+				}
+				
+				100% {
+					transform:rotateZ(0deg);
+				}
+			}
+			
+			@keyframes zui-down{
+				0% {
+					transform:rotateZ(0deg);
+				}
+				
+				50%{
+					transform:rotateZ(-60deg);
+				}
+				
+				100% {
+					transform:rotateZ(0deg);
+				}
+			}
+			
+			.chidou{
+				position:relative;
+			}
+			
+			/**********豆的部分******************/
+			.chidou > div:nth-child(3),
+			.chidou > div:nth-child(4),
+			.chidou > div:nth-child(5){
+				width:10px;
+				height:10px;
+				border-radius: 100%;
+				background-color: white;
+				position:absolute;
+				left:100px;/*豆初始摆放的位置*/
+				top: 20px;
+				
+				animation-name:dou;
+				animation-duration: 1s;
+				animation-iteration-count: infinite;
+				
+				animation-timing-function: linear; /*平缓的过渡效果*/
+			}
+			
+			.chidou > div:nth-child(3){
+				animation-delay: 0.33s;
+			}
+			
+			.chidou > div:nth-child(4){
+				animation-delay: 0.66s;
+			}
+			
+			.chidou > div:nth-child(5){
+				animation-delay: 0.99s;
+			}
+			
+			@keyframes dou{
+				100%{
+					transform: translateX(-100px);
+					opacity: 0.7;
+				}
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="chidou">
+			<!-- 嘴的部分 -->
+			<div></div>
+			<div></div>
+			
+			<!-- 豆的部分 -->
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:200px;
+				height:200px;
+				border:1px solid red;
+			}
+		</style>
+		
+		<script>
+			function over(e){
+				e.preventDefault();
+			}
+			
+			//抓起, 记录一下, 当前被抓起的元素的id
+			function drag(e){
+				//获取id
+				var id = e.target.id;//被抓起元素的id值
+				
+				//传输数据
+				e.dataTransfer.setData("id",id);
+			}
+			
+			//放下
+			function drop(e){
+				//获取被抓取的元素的id
+				var beizhuaId = e.dataTransfer.getData("id");
+				
+				//被放置的位置的div的id
+				var fangId = e.target.id;
+				
+				//获取到被抓取的元素
+				var beiZhua = document.getElementById(beizhuaId);
+				//获取被替换的div
+				var fang = document.getElementById(fangId);
+				
+				var beiZhuaParent = beiZhua.parentNode;
+				var fangParent = fang.parentNode;
+				
+				//互换
+				beiZhuaParent.appendChild(fang);
+				fangParent.appendChild(beiZhua);
+				
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 上面的div -->
+		<div ondrop="drop(event)" ondragover="over(event)">
+			<div id="z-1" draggable="true" ondragstart="drag(event)">上</div>
+		</div>
+		
+		<!-- 下面的div -->
+		<div ondrop="drop(event)" ondragover="over(event)">
+			<div id="z-2" draggable="true" ondragstart="drag(event)" >下</div>
+		</div>
+	</body>
+</html>

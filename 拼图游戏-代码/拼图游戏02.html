@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:200px;
+				height:200px;
+				border:1px solid red;
+			}
+		</style>
+		<script>
+			function drag(e){
+				console.log(e.target.id);/*注意:e.target 表示拖拽目标*/
+			}
+			
+			function over(e){
+				console.log("划过我了");
+				//阻止默认事件的产生
+				e.preventDefault();
+			}
+			
+			function drop(){
+				console.log("放下");
+			}
+		</script>
+	</head>
+	<body>
+		<!--
+        	作者：homexue@126.com
+        	时间：2017-11-23
+        	描述：draggable:拖拽, html5的新特性
+        	
+        	ondragstart:开始拖拽
+        	ondragover: 在上面滑动
+        	ondrop: 放下. 注意. 放下的时候要先屏蔽掉ondragover  e.preventDefault();
+        -->
+		<div id="diyige" draggable="true" ondragstart="drag(event)">第一个</div>
+		<div ondragover="over(event)">第二个</div>
+		<div ondrop="drop()" ondragover="over(event)">第三个</div>
+	</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width:100px;
+				height:100px;
+			}
+			
+			.tu{
+				background-image: url(img/bg.jpg);
+			}
+			
+			#z-1{
+				background-position: 0px 0px;
+			}
+			#z-2{
+				background-position: -100px 0px;
+			}
+			#z-3{
+				background-position: -200px 0px;
+			}
+			#z-4{
+				background-position: 0px -100px;
+			}
+			#z-5{
+				background-position: -100px -100px;
+			}
+			#z-6{
+				background-position: -200px -100px;
+			}
+			#z-7{
+				background-position: 0px -200px;
+			}
+			#z-8{
+				background-position: -100px -200px;
+			}
+			#z-9{
+				background-position: -200px -200px;
+			}
+		</style>
+		
+		<script>
+			function over(e){
+				e.preventDefault();
+			}
+			
+			//抓起, 记录一下, 当前被抓起的元素的id
+			function drag(e){
+				//获取id
+				var id = e.target.id;//被抓起元素的id值
+				
+				//传输数据
+				e.dataTransfer.setData("id",id);
+			}
+			
+			//放下
+			function drop(e){
+				//获取被抓取的元素的id
+				var beizhuaId = e.dataTransfer.getData("id");
+				
+				//被放置的位置的div的id
+				var fangId = e.target.id;
+				
+				//获取到被抓取的元素
+				var beiZhua = document.getElementById(beizhuaId);
+				//获取被替换的div
+				var fang = document.getElementById(fangId);
+				
+				var beiZhuaParent = beiZhua.parentNode;
+				var fangParent = fang.parentNode;
+				
+				//互换
+				beiZhuaParent.appendChild(fang);
+				fangParent.appendChild(beiZhua);
+				
+				jiaoyan();
+				
+			}
+			
+			
+			/**
+			 * 校验的部分
+			 */
+			function jiaoyan(){
+				var count = 0;
+				//获取到所有的子div. tu
+				var tus = document.getElementsByClassName("tu");
+				for(var i = 0 ; i < tus.length; i++){
+					var tu = tus[i];
+					var fu = tu.parentNode;
+					
+					//分别获取到id属性
+					var tuId = tu.getAttribute("id");
+					var fuId = fu.getAttribute("id");
+					
+					//1. 可以去掉f-, 和z-,  然后做判断
+//					if(tuId.replace("z-","") == fuId.replace("f-","")){
+//						count++;
+//					} else {//子div落在了其他的父节点上. 不需要判断了. 你没完成呢
+//						return;
+//					}
+
+					//2. 截取, 最后一位
+					var tuIdLast = tuId.substr(2,1);
+					var fuIdLast = fuId.substr(2,1);
+					if(tuIdLast == fuIdLast){
+						count++;
+					} else {
+						return;
+					}
+				}
+				
+				if(count == 9){
+					alert("恭喜你, 超厉害的, 你赢了. 我服了. 这么难都能过去.");
+				}
+			}
+			
+			function daluan(){
+				//先获取到所有的tu
+				var tus = document.getElementsByClassName("tu");
+				
+				for(var i = 0 ; i < 100; i++){
+					
+					var m = parseInt(Math.random()*9);
+					var n = parseInt(Math.random()*9);
+					
+					//互换tus[m]  <==> tus[n];
+					
+					var tusmp = tus[m].parentNode;
+					var tusnp = tus[n].parentNode;
+					
+					tusmp.appendChild(tus[n]);
+					tusnp.appendChild(tus[m]);
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<table border="1">
+			<tr>
+				<td>
+					<div id="f-1" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-1" draggable="true" ondragstart="drag(event)" ></div>
+					</div>
+				</td>
+				<td>
+					<div id="f-2" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-2" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+				<td>
+					<div id="f-3" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-3" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="f-4" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-4" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+				<td>
+					<div id="f-5" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-5" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+				<td>
+					<div id="f-6" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-6" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div id="f-7" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-7" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+				<td>
+					<div id="f-8" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-8" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+				<td>
+					<div id="f-9" ondrop="drop(event)" ondragover="over(event)">
+						<div class="tu" id="z-9" draggable="true" ondragstart="drag(event)"></div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		
+		<input type="button" value="打乱" onclick="daluan()" />
+	</body>
+</html>

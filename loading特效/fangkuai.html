@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body {
+				background-color:#E65666;
+			}
+			
+			.fangkuai > div {
+				width:50px;
+				height:50px;
+				background-color:white;
+				
+				animation-name: fanzhuan;
+				animation-delay: 0s;
+				animation-duration: 3s;
+				animation-iteration-count: infinite;
+				animation-timing-function: ease-in-out;
+			}
+			
+			@keyframes fanzhuan{
+				0%{
+					transform:  rotateX(0deg) rotateY(0deg);
+				}
+				25%{
+					transform: perspective(100px) rotateX(180deg) rotateY(0deg); /*perspective 景深, 透视距离, 越大,效果越平缓, 越小, 效果越激烈*/
+				}
+				50%{
+					transform: perspective(100px) rotateX(180deg) rotateY(180deg); 
+				}
+				75%{
+					transform: perspective(100px) rotateX(0deg) rotateY(180deg); 
+				}
+				100%{
+					transform: perspective(100px) rotateX(0deg) rotateY(360deg); 
+				}
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div class="fangkuai">
+			<div></div>
+		</div>
+	</body>
+</html>

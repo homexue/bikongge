@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			body{
+				background-image: url(img/bg.jpg);
+			}
+			.container{
+				width:600px;
+				height:400px;
+				border:20px solid white;
+				margin:0 auto;  /*水平居中*/
+				position:relative;
+			}
+			
+			/*
+			 对图的部分进行布局
+			 * */
+			.tu{
+				position:absolute;
+				width:600px;
+				height:400px;
+				left:0;
+				top:0;
+				
+				/*使用弹性盒子来进行四等分*/
+				display: flex;
+			}
+			
+			.tu > div{
+				width:150px;
+				height:400px;
+				flex: 1;
+				position:relative;
+				overflow: hidden;
+			}
+			
+			.tu > div > span{
+				display:block;
+				width:150px;
+				height:400px;
+				position:absolute;
+				top:0;
+				left:-150px;
+			}
+			
+			.container > input{
+				display:none;
+			}
+			
+			.container > label{
+				position:relative;
+				z-index: 9999;
+				width:150px;
+				height:40px;
+				display:block;
+				float:left;
+				top:300px;
+				cursor: pointer;
+			}
+			
+			/*这里的样式， 当成span来看就行， 没毛病*/
+			.container > label::before{
+				content:"1";
+				width:35px;
+				height:35px;
+				border-radius: 50%;
+				background-color:rgba(130,195,213,.9);
+				
+				box-shadow: 0px 0px 0px 4px rgba(255,255,255,.3);
+				display:block;
+				position:absolute;
+				left:60px;
+				
+				/*文字剧中*/
+				text-align: center;
+				line-height: 35px;
+				
+				color:white;
+			}
+			
+			.container > label:nth-child(5):before{
+				content:"1";
+			}
+			.container > label:nth-child(6):before{
+				content:"2";
+			}
+			.container > label:nth-child(7):before{
+				content:"3";
+			}
+			.container > label:nth-child(8):before{
+				content:"4";
+			}
+			
+			.container > .xuan-1:checked ~ label:nth-child(5):before,
+			.container > .xuan-2:checked ~ label:nth-child(6):before,
+			.container > .xuan-3:checked ~ label:nth-child(7):before,
+			.container > .xuan-4:checked ~ label:nth-child(8):before{
+				color:rgba(130,195,213,.9);
+				background-color:white;
+			}
+			
+			/*放图， 请美女上场*/
+			.tu > div > span:nth-child(1){
+				background-image: url(img/1.jpg);
+			}
+			.tu > div > span:nth-child(2){
+				background-image: url(img/2.jpg);
+			}
+			.tu > div > span:nth-child(3){
+				background-image: url(img/3.jpg);
+			}
+			.tu > div > span:nth-child(4){
+				background-image: url(img/4.jpg);
+			}
+			
+			.tu > div:nth-child(1) > span{
+				background-position: 0px 0px;
+			}
+			
+			.tu > div:nth-child(2) > span{
+				background-position: -150px 0px;
+			}
+			
+			.tu > div:nth-child(3) > span{
+				background-position: -300px 0px;
+			}
+			
+			.tu > div:nth-child(4) > span{
+				background-position: -450px 0px;
+			}
+			
+			/*添加动画， 让美女能活动活动*/
+			.container > .xuan-1:checked ~ .tu > div > span:nth-child(1),
+			.container > .xuan-2:checked ~ .tu > div > span:nth-child(2),
+			.container > .xuan-3:checked ~ .tu > div > span:nth-child(3),
+			.container > .xuan-4:checked ~ .tu > div > span:nth-child(4){
+				z-index: 999;
+				transition: left 0.5s ease-in-out;
+				animation:none;
+				left:0px;
+			}
+			
+			/*所有的背景进行移动*/
+			input:checked ~ .tu > div > span{
+				animation-name:dongqilai;
+				animation-delay: 0s;
+				animation-duration:0.6s;
+				animation-iteration-count: 1;
+				animation-timing-function: ease-in-out;
+			}
+			
+			@keyframes dongqilai{
+				0%{
+					left:0px;
+				}
+				100%{
+					left:150px;
+				}
+			}
+			
+			/*最后的最后，添加一个边框*/
+			.container > label::after{
+				width:1px;
+				height:400px;
+				background:-webkit-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);
+				content:"";
+				display:block;
+				position:absolute;
+				right:0;
+				bottom:-60px;
+			}
+			
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<input type="radio" name="meinv" id="x-1" class="xuan-1" checked/>
+			<input type="radio" name="meinv" id="x-2" class="xuan-2"/>
+			<input type="radio" name="meinv" id="x-3" class="xuan-3"/>
+			<input type="radio" name="meinv" id="x-4" class="xuan-4"/>
+			
+			<label for="x-1"></label>
+			<label for="x-2"></label>
+			<label for="x-3"></label>
+			<label for="x-4"></label>
+			<!-- 放图的地方 -->
+			<div class="tu">
+				<!-- 图的第一部分 -->
+				<div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<!-- 图的第二部分 -->
+				<div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<!-- 图的第三部分 -->
+				<div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<!-- 图的第四部分 -->
+				<div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
